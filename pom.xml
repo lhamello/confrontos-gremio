@@ -14,13 +14,14 @@
 	</properties>
 
 	<dependencies>
-		<!-- COMMONS LANG: provê classes utilitárias para manipulações de stringa, números, concorrência, etc. -->
+		<!-- COMMONS LANG: provê classes utilitárias para manipulações de stringa, 
+			números, concorrência, etc. -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${latest.version}</version>
 		</dependency>
-		
+
 		<!-- DEPENDÊNCIAS PARA TESTE -->
 		<!-- HAMCREST: framework para facilitar asserções nos códigos de teste -->
 		<dependency>
@@ -52,4 +53,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>marcafut</finalName>
+
+		<plugins>
+
+			<!-- Maven Compiler: compila os fontes do projeto -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
