@@ -25,7 +25,7 @@ public enum Continente {
     return nome;
   }
 
-  public static Continente getInstancia(final String abreviatura) {
+  public static Continente getContinentePorAbreviatura(final String abreviatura) {
     for (Continente continente : Continente.values()) {
       final String abreviaturaContinente = continente.getAbreviatura();
 
@@ -34,6 +34,25 @@ public enum Continente {
       }
     }
 
-    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) é inválida. Valores válidos: AFR, AMN, AMS, ASI, EUR, OCE.", abreviatura));
+    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) é inválida.", abreviatura));
+  }
+  
+  public static Continente getContinentePorNome(final String nome) {
+    for (Continente continente : Continente.values()) {
+      final String nomeContinente = continente.getNome();
+
+      if (nomeContinente.equalsIgnoreCase(nome)) {
+        return continente;
+      }
+    }
+
+    throw new IllegalArgumentException(String.format("Nome informado (%s) é inválido.", nome));
+  }
+  
+  @Override
+  public String toString() {
+    final StringBuilder descricao = new StringBuilder();
+    descricao.append(abreviatura).append(" - ").append(nome);
+    return descricao.toString();
   }
 }

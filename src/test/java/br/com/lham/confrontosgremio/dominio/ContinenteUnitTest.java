@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,34 +11,54 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class ContinenteUnitTest {
 
-  @DisplayName("Devem existir 6 continentes")
   @Test
-  public void deveExistirSeisContinentes() {
+  public void deveExistir6Continentes() {
     final int numeroContinentesQueDevemExistir = 6;
-    assertThat("Devem existir 6 continentes.", Continente.values().length, equalTo(numeroContinentesQueDevemExistir));
+    assertThat("Deve existir 6 continentes.", Continente.values().length, equalTo(numeroContinentesQueDevemExistir));
   }
   
   @CsvSource({ "AFR, África", "AMN, América do Norte", "AMS, América do Sul", "ASI, Ásia", "EUR, Europa", "OCE, Oceania" })
-  @DisplayName("Deve retornar continente correto")
   @ParameterizedTest
-  public void deveRetornarInstaciaDeContinente(final String abreviaturaContinente, final String nomeContinente) {
-    final Continente continente = Continente.getInstancia(abreviaturaContinente);
-    assertThat("Deve retornar a abreviatura do continente correta.", continente.getAbreviatura(), equalTo(abreviaturaContinente));
-    assertThat("Deve retornar o nome do continente correto.", continente.getNome(), equalTo(nomeContinente));
+  public void deveRetornarInstaciaCorretaPesquisandoPorAbreviatura(final String abreviaturaContinente, final String nomeContinente) {
+    final Continente continente = Continente.getContinentePorAbreviatura(abreviaturaContinente);
+    assertThat("Deve retornar a abreviatura do continente correta após pesquisá-lo por sua abreviatura.", continente.getAbreviatura(), equalTo(abreviaturaContinente));
+    assertThat("Deve retornar o nome do continente correto após pesquisá-lo por sua abreviatura.",        continente.getNome(),        equalTo(nomeContinente));
+    assertThat("Deve validar toString()",                                                                 continente.toString(),       equalTo(abreviaturaContinente + " - " + nomeContinente));
   }
-
-  @DisplayName("Deve lançar exceção para abreviatura de continente inválida")
+  
+  @CsvSource({ "AFR, África", "AMN, América do Norte", "AMS, América do Sul", "ASI, Ásia", "EUR, Europa", "OCE, Oceania" })
+  @ParameterizedTest
+  public void deveRetornarInstaciaCorretaPesquisandoPorNome(final String abreviaturaContinente, final String nomeContinente) {
+    final Continente continente = Continente.getContinentePorNome(nomeContinente);
+    assertThat("Deve retornar a abreviatura do continente correta após pequisá-lo por seu nome.",  continente.getAbreviatura(), equalTo(abreviaturaContinente));
+    assertThat("Deve retornar o nome do continente correto após pesquisá-lo por seu nome.",        continente.getNome(),        equalTo(nomeContinente));
+  }
+  
   @ParameterizedTest
   @ValueSource(strings = { "África", "América do Norte", "América do Sul", "Ásia", "Europa", "Oceania" })
   public void deveLancarExcecaoParaAbreviaturaDeContinenteInvalida(final String abreviaturaInvalida) {
-    IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getInstancia(abreviaturaInvalida); });
-    assertThat("Deve validar a mensagem da exceção.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) é inválida. Valores válidos: AFR, AMN, AMS, ASI, EUR, OCE.", abreviaturaInvalida)));
+    final IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorAbreviatura(abreviaturaInvalida); });
+    assertThat("Deve lançar exceção de abreviatura inválida.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) é inválida.", abreviaturaInvalida)));
+  }
+  
+  @ParameterizedTest
+  @ValueSource(strings = { "AFR", "AMN", "AMS", "ASI", "EUR", "OCE" })
+  public void deveLancarExcecaoParaNomeDeContinenteInvalido(final String abreviaturaInvalida) {
+    final IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorNome(abreviaturaInvalida); });
+    assertThat("Deve lançar exceção de nome inválido.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) é inválido.", abreviaturaInvalida)));
   }
   
   @Test
-  public void deveLancarExcecaoParaAbreviaturaNula() {
+  public void deveLancarExcecaoParaAbreviaturaDeContinenteNula() {
     final String abreviaturaNula = null;
-    IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getInstancia(abreviaturaNula); });
-    assertThat("Deve validar a mensagem da exceção.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) é inválida. Valores válidos: AFR, AMN, AMS, ASI, EUR, OCE.", abreviaturaNula)));
+    IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorAbreviatura(abreviaturaNula); });
+    assertThat("Deve lançar exceção de abreviatura inválida para pesquisa com abreviatura nula.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) é inválida.", abreviaturaNula)));
+  }
+  
+  @Test
+  public void deveLancarExcecaoParaNomeDeContinenteNulo() {
+    final String nomeNulo = null;
+    IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorNome(nomeNulo); });
+    assertThat("Deve lançar exceção de nome inválido para pesquisa com nome nulo.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) é inválido.", nomeNulo)));
   }
 }
