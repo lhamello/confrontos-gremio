@@ -1,7 +1,55 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.lham</groupId>
-  <artifactId>confrontos-gremio</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.lham</groupId>
+	<artifactId>confrontos-gremio</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<latest.version>LATEST</latest.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- COMMONS LANG: provê classes utilitárias para manipulações de stringa, números, concorrência, etc. -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${latest.version}</version>
+		</dependency>
+		
+		<!-- DEPENDÊNCIAS PARA TESTE -->
+		<!-- HAMCREST: framework para facilitar asserções nos códigos de teste -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>${latest.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JUNIT 5: framework para construção de testes -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${latest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- JUNIT 5: suporte a testes parametrizados -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${latest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- JUNIT 5: integração com JUNIT 4 -->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${latest.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
