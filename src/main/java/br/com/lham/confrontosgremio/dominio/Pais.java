@@ -1,11 +1,6 @@
 package br.com.lham.confrontosgremio.dominio;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import br.com.lham.confrontosgremio.infraestrutura.validacao.ErroValidacaoException;
-import br.com.lham.confrontosgremio.infraestrutura.validacao.ValidadorObject;
-import br.com.lham.confrontosgremio.infraestrutura.validacao.ValidadorString;
+import br.com.validadorfluente.novo2.Validador;
 
 public final class Pais {
 
@@ -33,14 +28,10 @@ public final class Pais {
   }
 
   private void validarConstrucao() {
-    List<ErroValidacaoException> errosValidacaoDominio = new LinkedList<>();
-
-    errosValidacaoDominio.addAll(ValidadorString.paraCampo(abreviatura, "Abreviatura").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoIgualA(3).validar());
-    errosValidacaoDominio.addAll(ValidadorString.paraCampo(nome, "Nome").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoMenorOuIgualQue(60).validar());
-    errosValidacaoDominio.addAll(ValidadorObject.paraCampo(continente, "Continente").queNaoDeveSerNulo().validar());
-
-    if (!errosValidacaoDominio.isEmpty()) {
-      throw new PaisInvalidoException(errosValidacaoDominio);
-    }
+    Validador.doDominio(this.getClass())
+             .paraCampo(abreviatura, "Abreviatura").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoIgualA(3)
+             .paraCampo(nome, "Nome").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoMenorOuIgualQue(60)
+             .paraCampo(continente, "Continente").queNaoDeveSerNulo()
+             .validar();;
   }
 }

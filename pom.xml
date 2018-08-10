@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.lham</groupId>
+	<groupId>br.com.lhamello</groupId>
 	<artifactId>confrontos-gremio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -11,6 +11,7 @@
 		<java.version>1.8</java.version>
 		<latest.version>LATEST</latest.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -20,6 +21,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${latest.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.validadorfluente</groupId>
+			<artifactId>validador-fluente-dsl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- DEPENDÊNCIAS PARA TESTE -->
@@ -55,14 +62,14 @@
 	</dependencies>
 
 	<build>
-		<finalName>marcafut</finalName>
+		<finalName>confrontos-gremio</finalName>
 
 		<plugins>
 
 			<!-- Maven Compiler: compila os fontes do projeto -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
