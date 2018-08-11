@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.validadorfluente.novo2.DominioException;
+import br.com.validadorfluente.novo3.DominioException;
+import br.com.validadorfluente.novo3.ErroValidacaoException;
 
 public class PaisUnitTest {
 
@@ -19,10 +20,10 @@ public class PaisUnitTest {
     
     final Pais pais = new Pais(abreviatura, nome, continente);
     
-    assertAll("Verificando a cria��o do objeto...",
-              () -> assertThat("Verificando atribui��o da abreviatura.", pais.getAbreviatura(), equalTo(abreviatura)),
-              () -> assertThat("Verificando atribui��o do nome.",        pais.getNome(),        equalTo(nome)),
-              () -> assertThat("Verificando atribui��o do continente.",  pais.getContinente(),  equalTo(continente)));    
+    assertAll("Verificando a criação do objeto...",
+              () -> assertThat("Verificando atribuição da abreviatura.", pais.getAbreviatura(), equalTo(abreviatura)),
+              () -> assertThat("Verificando atribuição do nome.",        pais.getNome(),        equalTo(nome)),
+              () -> assertThat("Verificando atribuição do continente.",  pais.getContinente(),  equalTo(continente)));    
   }
   
   @Test
@@ -32,19 +33,19 @@ public class PaisUnitTest {
     final Continente continenteNulo = null;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaNula, nomeNulo, continenteNulo));
-    assertThat("Erro de valida��o na contru��o do objeto Pa�s.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação na construção do domínio País.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 3;
-    assertThat("Deve ter 3 erros de valida��o (todos campos nulos).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter 3 erros de validação (todos campos nulos).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura nula.", erroValidacao.getMessage(), equalTo("Campo Abreviatura � de preenchimento obrigat�rio."));    
+    ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura nula.", erroValidacao.getMessage(), equalTo("Abreviatura é de preenchimento obrigatório."));    
     
     erroValidacao = excecao.getErrosValidacao().get(1);
-    assertThat("Mensagem de valida��o para nome nulo.", erroValidacao.getMessage(), equalTo("Campo Nome � de preenchimento obrigat�rio."));
+    assertThat("Mensagem de validação para nome nulo.", erroValidacao.getMessage(), equalTo("Nome é de preenchimento obrigatório."));
     
     erroValidacao = excecao.getErrosValidacao().get(2);
-    assertThat("Mensagem de valida��o para continente nulo.", erroValidacao.getMessage(), equalTo("Campo Continente � de preenchimento obrigat�rio."));
+    assertThat("Mensagem de validação para continente nulo.", erroValidacao.getMessage(), equalTo("Continente é de preenchimento obrigatório."));
   }
   
   /* ========== Valida��es do atributo ABREVIATURA ========== */
@@ -56,13 +57,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaNula, nome, continente));
-    assertThat("Erro de valida��o para abreviatura nula.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura nula.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (abreviatura nula).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (abreviatura nula).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura nula.", erroValidacao.getMessage(), equalTo("Campo Abreviatura � de preenchimento obrigat�rio."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura nula.", erroValidacao.getMessage(), equalTo("Abreviatura é de preenchimento obrigatório."));
   }
   
   @Test
@@ -72,13 +73,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaVazia, nome, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura n�o pode ficar em branco."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura não pode ficar em branco."));
   }
   
   @Test
@@ -88,13 +89,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaEmBranco, nome, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura n�o pode ficar em branco."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura não pode ficar em branco."));
   }
   
   @Test
@@ -104,13 +105,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaTamanho2, nome, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura deve ter 3 letra(s)."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura deve ter 3 caracter(es)."));
   }
   
   @Test
@@ -120,13 +121,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaTamanho4, nome, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura deve ter 3 letra(s)."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura deve ter 3 caracter(es)."));
   }
   
   /* ========== Valida��es do atributo NOME ========== */
@@ -138,13 +139,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviatura, nomeNulo, continente));
-    assertThat("Erro de valida��o para nome nulo.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para nome nulo.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (nome nulo).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (nome nulo).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para nome nulo.", erroValidacao.getMessage(), equalTo("Campo Nome � de preenchimento obrigat�rio."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para nome nulo.", erroValidacao.getMessage(), equalTo("Nome é de preenchimento obrigatório."));
   }
   
   @Test
@@ -154,13 +155,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviatura, nomeVazio, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
     assertThat("Deve ter somente 1 erro de valida��o (nome vazio).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para nome vazio.", erroValidacao.getMessage(), equalTo("Nome n�o pode ficar em branco."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para nome vazio.", erroValidacao.getMessage(), equalTo("Nome não pode ficar em branco."));
   }
   
   @Test
@@ -170,13 +171,13 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviatura, nomeEmBranco, continente));
-    assertThat("Erro de valida��o para nome em branco.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para nome em branco.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (nome em branco).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (nome em branco).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para nome em branco.", erroValidacao.getMessage(), equalTo("Nome n�o pode ficar em branco."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para nome em branco.", erroValidacao.getMessage(), equalTo("Nome não pode ficar em branco."));
   }
   
   @Test
@@ -186,16 +187,16 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviatura, nomeCom61Letras, continente));
-    assertThat("Erro de valida��o para nome maior que 60 letras.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para nome maior que 60 letras.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (nome maior que 60 letras).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (nome maior que 60 letras).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para nome maior que 60 letras.", erroValidacao.getMessage(), equalTo("Nome deve ter no m�ximo 60 letra(s)."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para nome maior que 60 letras.", erroValidacao.getMessage(), equalTo("Nome deve ter no máximo 60 caracter(es)."));
   }
   
-/* ========== Valida��es do atributo CONTINENTE ========== */
+///* ========== Valida��es do atributo CONTINENTE ========== */
   
   @Test
   public void naoDeveCriarPaisComAContinenteNulo() {
@@ -204,12 +205,12 @@ public class PaisUnitTest {
     final Continente continenteNulo = null;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviatura, nome, continenteNulo));
-    assertThat("Erro de valida��o para abreviatura nula.", excecao.getMessage(), equalTo("Erro na constru��o do dom�nio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura nula.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (continente nulo).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (continente nulo).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
-    final IllegalArgumentException erroValidacao = excecao.getErrosValidacao().get(0);
-    assertThat("Mensagem de valida��o para continente nulo.", erroValidacao.getMessage(), equalTo("Campo Continente � de preenchimento obrigat�rio."));
+    final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
+    assertThat("Mensagem de validação para continente nulo.", erroValidacao.getMessage(), equalTo("Continente é de preenchimento obrigatório."));
   }
 }
