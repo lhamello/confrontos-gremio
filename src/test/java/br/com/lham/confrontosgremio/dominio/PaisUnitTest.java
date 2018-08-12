@@ -105,7 +105,7 @@ public class PaisUnitTest {
     final Continente continente = Continente.AMERICA_DO_SUL;
     
     final DominioException excecao = assertThrows(DominioException.class, () -> new Pais(abreviaturaTamanho2, nome, continente));
-    assertThat("Erro de valida��o para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
+    assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
     assertThat("Deve ter somente 1 erro de validação (abreviatura vazia).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
