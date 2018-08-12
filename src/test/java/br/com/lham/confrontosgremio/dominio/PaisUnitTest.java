@@ -48,7 +48,7 @@ public class PaisUnitTest {
     assertThat("Mensagem de validação para continente nulo.", erroValidacao.getMessage(), equalTo("Continente é de preenchimento obrigatório."));
   }
   
-  /* ========== Valida��es do atributo ABREVIATURA ========== */
+  /* ========== Validações do atributo ABREVIATURA ========== */
   
   @Test
   public void naoDeveCriarPaisComAbreviaturaNula() {
@@ -130,7 +130,7 @@ public class PaisUnitTest {
     assertThat("Mensagem de validação para abreviatura vazia.", erroValidacao.getMessage(), equalTo("Abreviatura deve ter 3 caracter(es)."));
   }
   
-  /* ========== Valida��es do atributo NOME ========== */
+  /* ========== Validações do atributo NOME ========== */
   
   @Test
   public void naoDeveCriarPaisComNomeNulo() {
@@ -196,7 +196,7 @@ public class PaisUnitTest {
     assertThat("Mensagem de validação para nome maior que 60 letras.", erroValidacao.getMessage(), equalTo("Nome deve ter no máximo 60 caracter(es)."));
   }
   
-///* ========== Valida��es do atributo CONTINENTE ========== */
+///* ========== Validações do atributo CONTINENTE ========== */
   
   @Test
   public void naoDeveCriarPaisComAContinenteNulo() {
