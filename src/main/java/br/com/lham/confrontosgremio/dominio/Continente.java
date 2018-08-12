@@ -34,7 +34,7 @@ public enum Continente {
       }
     }
 
-    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) � inv�lida.", abreviatura));
+    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) inválida.", abreviatura));
   }
   
   public static Continente getContinentePorNome(final String nome) {
@@ -46,7 +46,7 @@ public enum Continente {
       }
     }
 
-    throw new IllegalArgumentException(String.format("Nome informado (%s) � inv�lido.", nome));
+    throw new IllegalArgumentException(String.format("Nome informado (%s) inválido.", nome));
   }
   
   @Override
