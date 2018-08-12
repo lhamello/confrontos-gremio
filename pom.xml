@@ -13,7 +13,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
+	
+	<repositories>
+		<repository>
+			<id>RepositorioLocal</id>
+			<url>C:\Dev\Maven\repository</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<!-- COMMONS LANG: provê classes utilitárias para manipulações de stringa, 
 			números, concorrência, etc. -->
