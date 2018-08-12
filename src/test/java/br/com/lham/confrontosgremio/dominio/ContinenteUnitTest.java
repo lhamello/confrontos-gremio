@@ -17,48 +17,48 @@ public class ContinenteUnitTest {
     assertThat("Deve existir 6 continentes.", Continente.values().length, equalTo(numeroContinentesQueDevemExistir));
   }
   
-  @CsvSource({ "AFR, ¡frica", "AMN, AmÈrica do Norte", "AMS, AmÈrica do Sul", "ASI, ¡sia", "EUR, Europa", "OCE, Oceania" })
+  @CsvSource({ "AFR, √Åfrica", "AMN, Am√©rica do Norte", "AMS, Am√©rica do Sul", "ASI, √Åsia", "EUR, Europa", "OCE, Oceania" })
   @ParameterizedTest
   public void deveRetornarInstaciaCorretaPesquisandoPorAbreviatura(final String abreviaturaContinente, final String nomeContinente) {
     final Continente continente = Continente.getContinentePorAbreviatura(abreviaturaContinente);
-    assertThat("Deve retornar a abreviatura do continente correta apÛs pesquis·-lo por sua abreviatura.", continente.getAbreviatura(), equalTo(abreviaturaContinente));
-    assertThat("Deve retornar o nome do continente correto apÛs pesquis·-lo por sua abreviatura.",        continente.getNome(),        equalTo(nomeContinente));
+    assertThat("Deve retornar a abreviatura do continente correta ap√≥s pesquis√°-lo por sua abreviatura.", continente.getAbreviatura(), equalTo(abreviaturaContinente));
+    assertThat("Deve retornar o nome do continente correto ap√≥s pesquis√°-lo por sua abreviatura.",        continente.getNome(),        equalTo(nomeContinente));
     assertThat("Deve validar toString()",                                                                 continente.toString(),       equalTo(abreviaturaContinente + " - " + nomeContinente));
   }
   
-  @CsvSource({ "AFR, ¡frica", "AMN, AmÈrica do Norte", "AMS, AmÈrica do Sul", "ASI, ¡sia", "EUR, Europa", "OCE, Oceania" })
+  @CsvSource({ "AFR, √Åfrica", "AMN, Am√©rica do Norte", "AMS, Am√©rica do Sul", "ASI, √Åsia", "EUR, Europa", "OCE, Oceania" })
   @ParameterizedTest
   public void deveRetornarInstaciaCorretaPesquisandoPorNome(final String abreviaturaContinente, final String nomeContinente) {
     final Continente continente = Continente.getContinentePorNome(nomeContinente);
-    assertThat("Deve retornar a abreviatura do continente correta apÛs pequis·-lo por seu nome.",  continente.getAbreviatura(), equalTo(abreviaturaContinente));
-    assertThat("Deve retornar o nome do continente correto apÛs pesquis·-lo por seu nome.",        continente.getNome(),        equalTo(nomeContinente));
+    assertThat("Deve retornar a abreviatura do continente correta ap√≥s pequis√°-lo por seu nome.",  continente.getAbreviatura(), equalTo(abreviaturaContinente));
+    assertThat("Deve retornar o nome do continente correto ap√≥s pesquis√°-lo por seu nome.",        continente.getNome(),        equalTo(nomeContinente));
   }
   
   @ParameterizedTest
-  @ValueSource(strings = { "¡frica", "AmÈrica do Norte", "AmÈrica do Sul", "¡sia", "Europa", "Oceania" })
+  @ValueSource(strings = { "√Åfrica", "Am√©rica do Norte", "Am√©rica do Sul", "√Åsia", "Europa", "Oceania" })
   public void deveLancarExcecaoParaAbreviaturaDeContinenteInvalida(final String abreviaturaInvalida) {
     final IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorAbreviatura(abreviaturaInvalida); });
-    assertThat("Deve lanÁar exceÁ„o de abreviatura inv·lida.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) È inv·lida.", abreviaturaInvalida)));
+    assertThat("Deve lan√ßar exce√ß√£o de abreviatura inv√°lida.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) inv√°lida.", abreviaturaInvalida)));
   }
   
   @ParameterizedTest
   @ValueSource(strings = { "AFR", "AMN", "AMS", "ASI", "EUR", "OCE" })
   public void deveLancarExcecaoParaNomeDeContinenteInvalido(final String abreviaturaInvalida) {
     final IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorNome(abreviaturaInvalida); });
-    assertThat("Deve lanÁar exceÁ„o de nome inv·lido.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) È inv·lido.", abreviaturaInvalida)));
+    assertThat("Deve lan√ßar exce√ß√£o de nome inv√°lido.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) inv√°lido.", abreviaturaInvalida)));
   }
   
   @Test
   public void deveLancarExcecaoParaAbreviaturaDeContinenteNula() {
     final String abreviaturaNula = null;
     IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorAbreviatura(abreviaturaNula); });
-    assertThat("Deve lanÁar exceÁ„o de abreviatura inv·lida para pesquisa com abreviatura nula.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) È inv·lida.", abreviaturaNula)));
+    assertThat("Deve lan√ßar exce√ß√£o de abreviatura inv√°lida para pesquisa com abreviatura nula.", excecao.getMessage(), equalTo(String.format("Abreviatura informada (%s) inv√°lida.", abreviaturaNula)));
   }
   
   @Test
   public void deveLancarExcecaoParaNomeDeContinenteNulo() {
     final String nomeNulo = null;
     IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> { Continente.getContinentePorNome(nomeNulo); });
-    assertThat("Deve lanÁar exceÁ„o de nome inv·lido para pesquisa com nome nulo.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) È inv·lido.", nomeNulo)));
+    assertThat("Deve lan√ßar exce√ß√£o de nome inv√°lido para pesquisa com nome nulo.", excecao.getMessage(), equalTo(String.format("Nome informado (%s) inv√°lido.", nomeNulo)));
   }
 }

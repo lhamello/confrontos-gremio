@@ -2,10 +2,10 @@ package br.com.lham.confrontosgremio.dominio;
 
 public enum Continente {
 
-  AFRICA          ("AFR", "¡frica"), 
-  AMERICA_DO_NORTE("AMN", "AmÈrica do Norte"), 
-  AMERICA_DO_SUL  ("AMS", "AmÈrica do Sul"), 
-  ASIA            ("ASI", "¡sia"), 
+  AFRICA          ("AFR", "√Åfrica"), 
+  AMERICA_DO_NORTE("AMN", "Am√©rica do Norte"), 
+  AMERICA_DO_SUL  ("AMS", "Am√©rica do Sul"), 
+  ASIA            ("ASI", "√Åsia"), 
   EUROPA          ("EUR", "Europa"), 
   OCEANIA         ("OCE", "Oceania");
 
@@ -34,7 +34,7 @@ public enum Continente {
       }
     }
 
-    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) È inv·lida.", abreviatura));
+    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) ÔøΩ invÔøΩlida.", abreviatura));
   }
   
   public static Continente getContinentePorNome(final String nome) {
@@ -46,7 +46,7 @@ public enum Continente {
       }
     }
 
-    throw new IllegalArgumentException(String.format("Nome informado (%s) È inv·lido.", nome));
+    throw new IllegalArgumentException(String.format("Nome informado (%s) ÔøΩ invÔøΩlido.", nome));
   }
   
   @Override
