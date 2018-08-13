@@ -158,7 +158,7 @@ public class PaisUnitTest {
     assertThat("Erro de validação para abreviatura vazia.", excecao.getMessage(), equalTo("Erro na construção do domínio: br.com.lham.confrontosgremio.dominio.Pais."));
     
     final int numeroErrosValidacao = 1;
-    assertThat("Deve ter somente 1 erro de valida��o (nome vazio).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
+    assertThat("Deve ter somente 1 erro de validação (nome vazio).", excecao.getErrosValidacao().size(), equalTo(numeroErrosValidacao));
     
     final ErroValidacaoException erroValidacao = excecao.getErrosValidacao().get(0);
     assertThat("Mensagem de validação para nome vazio.", erroValidacao.getMessage(), equalTo("Nome não pode ficar em branco."));
