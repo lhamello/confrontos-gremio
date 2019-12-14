@@ -12,7 +12,7 @@ public enum Continente {
   private final String abreviatura;
   private final String nome;
 
-  private Continente(final String abreviatura, final String nome) {
+  Continente(final String abreviatura, final String nome) {
     this.abreviatura = abreviatura;
     this.nome = nome;
   }

@@ -1,7 +1,5 @@
 package br.com.lham.confrontosgremio.dominio;
 
-import br.com.validadorfluente.novo3.ValidadorFluente;
-
 public final class Pais {
 
   private static final short TAMANHO_EXATO_ATRIBUTO_ABREVIATURA = 3;
@@ -15,7 +13,7 @@ public final class Pais {
     this.abreviatura = abreviatura;
     this.nome = nome;
     this.continente = continente;
-    this.validarConstrucao();
+//    this.validarConstrucao();
   }
 
   public String getAbreviatura() {
@@ -30,11 +28,11 @@ public final class Pais {
     return continente;
   }
 
-  private void validarConstrucao() {
-    ValidadorFluente.paraClasseDeDominio(this.getClass())
-                    .queContemAtributo(abreviatura, "Abreviatura").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoIgualA(TAMANHO_EXATO_ATRIBUTO_ABREVIATURA).validar()
-                    .queContemAtributo(nome, "Nome").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoMenorOuIgualQue(TAMANHO_MAXIMO_ATRIBUTO_NOME).validar()
-                    .queContemAtributo(continente, "Continente").queNaoDeveSerNulo().validar()
-                    .contruirDominio();
-  }
+//  private void validarConstrucao() {
+//    ValidadorFluente.paraClasseDeDominio(this.getClass())
+//                    .queContemAtributo(abreviatura, "Abreviatura").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoIgualA(TAMANHO_EXATO_ATRIBUTO_ABREVIATURA).validar()
+//                    .queContemAtributo(nome, "Nome").queNaoDeveSerNulo().queNaoDeveSerVazio().queDeveTerTamanhoMenorOuIgualQue(TAMANHO_MAXIMO_ATRIBUTO_NOME).validar()
+//                    .queContemAtributo(continente, "Continente").queNaoDeveSerNulo().validar()
+//                    .contruirDominio();
+//  }
 }

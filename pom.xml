@@ -8,120 +8,46 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<java.version>1.8</java.version>
-		<latest.version>LATEST</latest.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<sonar.jacoco.reportPaths>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPaths>
-        <test.suite>**/*UnitTest.class</test.suite>
+		<junit.version>5.5.2</junit.version>
 	</properties>
 
 	<dependencies>
-		<!-- COMMONS LANG: provê classes utilitárias para manipulações de stringa, 
-			números, concorrência, etc. -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${latest.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.validadorfluente</groupId>
-			<artifactId>validador-fluente-dsl</artifactId>
-			<version>0.0.1</version>
-			<systemPath>C:\Users\Titi\.m2\repository\br\com\validadorfluente\validador-fluente-dsl\0.0.1-SNAPSHOT\validador-fluente-dsl-0.0.1-SNAPSHOT.jar</systemPath>
-			<scope>system</scope>
-		</dependency>
-
-		<!-- DEPENDÊNCIAS PARA TESTE -->
-		<!-- HAMCREST: framework para facilitar asserções nos códigos de teste -->
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<version>${latest.version}</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- JUNIT 5: framework para construção de testes -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${latest.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- JUNIT 5: suporte a testes parametrizados -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
-			<version>${latest.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- JUNIT 5: integração com JUNIT 4 -->
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<version>${latest.version}</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>confrontos-gremio</finalName>
-
 		<plugins>
-
-			<!-- Maven Compiler: compila os fontes do projeto -->
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 
-			<!-- Maven Surefire: executa testes e gera reports de testes -->
 			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
-				<configuration>
-					<includes>
-						<include>${test.suite}</include>
-					</includes>
-				</configuration>
-			</plugin>
-
-			<!-- Jacoco Maven: provê relatórios de cobertura de código -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
-				<configuration>
-					<destFile>${sonar.jacoco.reportPaths}</destFile>
-					<append>true</append>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default-prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-check</id>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.9</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.10-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
