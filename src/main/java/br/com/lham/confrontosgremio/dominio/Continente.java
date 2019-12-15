@@ -1,5 +1,8 @@
 package br.com.lham.confrontosgremio.dominio;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Continente {
 
   AFRICA          ("AFR", "África"), 
@@ -9,14 +12,22 @@ public enum Continente {
   EUROPA          ("EUR", "Europa"), 
   OCEANIA         ("OCE", "Oceania");
 
-  private final String abreviatura;
-  private final String nome;
+  private String abreviatura;
+  private String nome;
 
-  Continente(final String abreviatura, final String nome) {
+  private Continente(final String abreviatura, final String nome) {
     this.abreviatura = abreviatura;
     this.nome = nome;
   }
 
+  public static Optional<Continente> getInstancia(final String abreviatura) {
+    Continente continente = Arrays.stream(values())
+        .filter(c -> c.getAbreviatura().equals(abreviatura))
+        .findFirst()
+        .orElse(null);
+    return Optional.ofNullable(continente);
+  }
+  
   public String getAbreviatura() {
     return abreviatura;
   }
@@ -25,34 +36,8 @@ public enum Continente {
     return nome;
   }
 
-  public static Continente getContinentePorAbreviatura(final String abreviatura) {
-    for (Continente continente : Continente.values()) {
-      final String abreviaturaContinente = continente.getAbreviatura();
-
-      if (abreviaturaContinente.equalsIgnoreCase(abreviatura)) {
-        return continente;
-      }
-    }
-
-    throw new IllegalArgumentException(String.format("Abreviatura informada (%s) inválida.", abreviatura));
-  }
-  
-  public static Continente getContinentePorNome(final String nome) {
-    for (Continente continente : Continente.values()) {
-      final String nomeContinente = continente.getNome();
-
-      if (nomeContinente.equalsIgnoreCase(nome)) {
-        return continente;
-      }
-    }
-
-    throw new IllegalArgumentException(String.format("Nome informado (%s) inválido.", nome));
-  }
-  
   @Override
   public String toString() {
-    final StringBuilder descricao = new StringBuilder();
-    descricao.append(abreviatura).append(" - ").append(nome);
-    return descricao.toString();
+    return String.format("%s (%s)", nome, abreviatura);
   }
 }
