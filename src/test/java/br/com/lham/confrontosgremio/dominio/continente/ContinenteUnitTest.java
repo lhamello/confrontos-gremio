@@ -1,4 +1,4 @@
-package br.com.lham.confrontosgremio.dominio;
+package br.com.lham.confrontosgremio.dominio.continente;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import br.com.lham.confrontosgremio.dominio.continente.Continente;
 
 public class ContinenteUnitTest {
 

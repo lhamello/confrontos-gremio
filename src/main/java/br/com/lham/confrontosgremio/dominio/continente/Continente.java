@@ -1,4 +1,4 @@
-package br.com.lham.confrontosgremio.dominio;
+package br.com.lham.confrontosgremio.dominio.continente;
 
 import java.util.Arrays;
 import java.util.Optional;
