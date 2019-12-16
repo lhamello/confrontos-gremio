@@ -1,7 +1,7 @@
-package br.com.lham.confrontosgremio.dominio.pais;
+package br.com.lham.confrontosgremio.dominio.model.pais;
 
-import br.com.lham.confrontosgremio.dominio.continente.Continente;
-import br.com.lham.confrontosgremio.nucleo.excecao.CampoObrigatorioException;
+import br.com.lham.confrontosgremio.dominio.model.continente.Continente;
+import br.com.lham.confrontosgremio.dominio.nucleocompartilhado.excecao.CampoObrigatorioException;
 
 public class Pais {
 

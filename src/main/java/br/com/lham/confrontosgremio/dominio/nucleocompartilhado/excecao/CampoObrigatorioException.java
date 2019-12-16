@@ -1,4 +1,4 @@
-package br.com.lham.confrontosgremio.nucleo.excecao;
+package br.com.lham.confrontosgremio.dominio.nucleocompartilhado.excecao;
 
 public class CampoObrigatorioException extends Exception {
 
