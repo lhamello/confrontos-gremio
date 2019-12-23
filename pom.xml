@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.lhamello</groupId>
+	<groupId>com.lhamello</groupId>
 	<artifactId>confrontos-gremio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -11,6 +11,8 @@
 		<junit.version>5.5.2</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<sonar.cobertura.reportPath>${project.build.directory}/site/cobertura/coverage.xml</sonar.cobertura.reportPath>
+		<sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
 	</properties>
 
 	<dependencies>
@@ -35,16 +37,18 @@
 	</dependencies>
 
 	<build>
+		<!-- Maven Compiler Plugin: compila os fontes do projeto -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>11</source> <!-- 1.8,1.9,1.10,11,12,13 -->
 					<target>11</target>
 				</configuration>
 			</plugin>
+			<!-- Maven War Plugin: responsável pelo empacotamento do projeto -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -53,10 +57,11 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<!-- Pitest Plugin: executa testes de mutação -->
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
-				<version>1.4.9</version>
+				<version>1.4.10</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.pitest</groupId>
@@ -64,27 +69,63 @@
 						<version>0.10</version>
 					</dependency>
 				</dependencies>
+				<configuration>
+					<outputFormats>
+						<outputFormat>XML</outputFormat>
+					</outputFormats>
+					<timestampedReports>false</timestampedReports>
+				</configuration>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.jacoco</groupId> -->
-<!-- 				<artifactId>jacoco-maven-plugin</artifactId> -->
-<!-- 				<version>0.8.2</version> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<goals> -->
-<!-- 							<goal>prepare-agent</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 					attached to Maven test phase -->
-<!-- 					<execution> -->
-<!-- 						<id>report</id> -->
-<!-- 						<phase>test</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>report</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
+			<!-- Maven Surefire: executa testes e gera reports de testes -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<!-- Jacoco Maven: provê relatórios de cobertura de código -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<configuration>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Optional URL to server. Default value is http://localhost:9000 -->
+				<sonar.host.url>
+					http://localhost:9000
+				</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
 </project>
