@@ -3,7 +3,7 @@ package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
-public class Mensagem {
+public final class Mensagem {
 
   private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("messages");
 
