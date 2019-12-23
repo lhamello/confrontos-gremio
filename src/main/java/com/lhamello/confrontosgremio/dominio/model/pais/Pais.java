@@ -4,13 +4,15 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util.Validacao;
 
 public final class Pais {
 
+  private static final int TAMANHO_ABREVIATURA = 3;
+  private static final int TAMANHO_MAXIMO_NOME = 50;
   private final String abreviatura;
   private final String nome;
   private final Continente continente;
 
   public Pais(final String abreviatura, final String nome, final Continente continente) {
-    this.abreviatura = validarAbreviatura(abreviatura, "Abreviatura", 3);
-    this.nome = validarNome(nome, "Nome", 50);
+    this.abreviatura = validarAbreviatura(abreviatura, "Abreviatura", TAMANHO_ABREVIATURA);
+    this.nome = validarNome(nome, "Nome", TAMANHO_MAXIMO_NOME);
     this.continente = validarContinente(continente, "Continente");
   }
 
@@ -25,12 +27,12 @@ public final class Pais {
     Validacao.campoComTamanhoMaximo(tamanhoMaximoCampo, nome, nomeCampo);
     return nome;
   }
-  
+
   private static Continente validarContinente(final Continente continente, final String nomeCampo) {
     Validacao.campoObrigatorio(continente, nomeCampo);
     return continente;
   }
-  
+
   public String getAbreviatura() {
     return abreviatura;
   }
