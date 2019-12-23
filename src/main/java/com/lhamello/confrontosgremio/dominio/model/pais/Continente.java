@@ -1,4 +1,4 @@
-package br.com.lham.confrontosgremio.dominio.continente;
+package com.lhamello.confrontosgremio.dominio.model.pais;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -12,16 +12,16 @@ public enum Continente {
   EUROPA          ("EUR", "Europa"), 
   OCEANIA         ("OCE", "Oceania");
 
-  private String abreviatura;
-  private String nome;
+  private final String abreviatura;
+  private final String nome;
 
-  private Continente(final String abreviatura, final String nome) {
+  Continente(final String abreviatura, final String nome) {
     this.abreviatura = abreviatura;
     this.nome = nome;
   }
 
   public static Optional<Continente> getInstancia(final String abreviatura) {
-    Continente continente = Arrays.stream(values())
+    final Continente continente = Arrays.stream(values())
         .filter(c -> c.getAbreviatura().equals(abreviatura))
         .findFirst()
         .orElse(null);
