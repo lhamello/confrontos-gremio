@@ -1,4 +1,4 @@
-package com.lham.confrontosgremio.nucleo.excecao;
+package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,13 +9,15 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.CampoOb
 
 public class CampoObrigatorioExceptionTest {
 
+  private static final String NOME_CAMPO = "Teste";
+
   @Test
   public void deveCriarExcecao() {
-    assertDoesNotThrow(() -> new CampoObrigatorioException("Nome"));
+    assertDoesNotThrow(() -> new CampoObrigatorioException(NOME_CAMPO));
   }
 
   @Test
   public void deveRetornarMensagem() {
-    assertEquals("Informe o campo: Nome.", new CampoObrigatorioException("Nome").getMessage());
+    assertEquals("Informe o campo Teste.", new CampoObrigatorioException(NOME_CAMPO).getMessage());
   }
 }
