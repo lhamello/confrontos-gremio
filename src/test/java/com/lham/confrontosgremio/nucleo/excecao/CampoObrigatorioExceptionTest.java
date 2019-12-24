@@ -16,6 +16,6 @@ public class CampoObrigatorioExceptionTest {
 
   @Test
   public void deveRetornarMensagem() {
-    assertEquals("Informe o campo Nome.", new CampoObrigatorioException("Nome").getMessage());
+    assertEquals("Informe o campo: Nome.", new CampoObrigatorioException("Nome").getMessage());
   }
 }

@@ -69,12 +69,6 @@
 						<version>0.10</version>
 					</dependency>
 				</dependencies>
-				<configuration>
-					<outputFormats>
-						<outputFormat>XML</outputFormat>
-					</outputFormats>
-					<timestampedReports>false</timestampedReports>
-				</configuration>
 			</plugin>
 			<!-- Maven Surefire: executa testes e gera reports de testes -->
 			<plugin>

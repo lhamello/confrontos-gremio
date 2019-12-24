@@ -6,6 +6,6 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util.Mensagem;
 public class TextoTamanhoMaximoException extends RuntimeException {
 
   public TextoTamanhoMaximoException(final String nomeCampo, final int tamanhoMaximo) {
-    super(Mensagem.getMensagem("dominio.nucleocompartilhado.validacao.campo.texto.invalido.tamanhomaximo", nomeCampo, tamanhoMaximo));
+    super(Mensagem.getMensagem("dominio.nucleocompartilhado.validacao.texto.tamanhomaximo", nomeCampo, tamanhoMaximo));
   }
 }
