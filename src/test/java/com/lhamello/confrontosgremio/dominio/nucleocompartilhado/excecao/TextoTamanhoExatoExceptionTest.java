@@ -14,23 +14,23 @@ class TextoTamanhoExatoExceptionTest {
   private static final int TAMANHO_EXATO = 1;
 
   @Test
-  public void testConstrucaoObjeto() {
+  public void testInstanciacao() {
     assertDoesNotThrow(() -> new TextoTamanhoExatoException(NOME_CAMPO, TAMANHO_EXATO));
   }
 
   @Test
   public void testMensagemSingular() {
-    assertEquals("Teste deve ter 1 caracter.", new TextoTamanhoExatoException(NOME_CAMPO, TAMANHO_EXATO).getMessage());
+    assertEquals("Campo Teste deve ter 1 caracter.", new TextoTamanhoExatoException(NOME_CAMPO, TAMANHO_EXATO).getMessage());
   }
 
   @Test
   public void testMensagemPlural() {
-    assertEquals("Teste deve ter 2 caracteres.", new TextoTamanhoExatoException(NOME_CAMPO, 2).getMessage());
+    assertEquals("Campo Teste deve ter 2 caracteres.", new TextoTamanhoExatoException(NOME_CAMPO, 2).getMessage());
   }
 
   @ParameterizedTest
   @ValueSource(ints = { 0, -1 })
-  public void testTamanhoExataoInvalido(final int tamanhoExato) {
+  public void testTamanhoExatoInvalido(final int tamanhoExato) {
     assertThrows(IllegalArgumentException.class, () -> new TextoTamanhoExatoException(NOME_CAMPO, tamanhoExato));
   }
 }

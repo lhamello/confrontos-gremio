@@ -12,12 +12,12 @@ public class CampoObrigatorioExceptionTest {
   private static final String NOME_CAMPO = "Teste";
 
   @Test
-  public void deveCriarExcecao() {
+  public void testInstanciacao() {
     assertDoesNotThrow(() -> new CampoObrigatorioException(NOME_CAMPO));
   }
 
   @Test
-  public void deveRetornarMensagem() {
+  public void testMensagem() {
     assertEquals("Informe o campo Teste.", new CampoObrigatorioException(NOME_CAMPO).getMessage());
   }
 }
