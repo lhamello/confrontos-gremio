@@ -19,16 +19,14 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.CampoOb
 class ValidacaoTest {
 
   @Test
-  public void deveTerMetodoConstrutorPrivado() throws NoSuchMethodException, SecurityException {
+  public void testMetodoConstrutorPrivado() throws NoSuchMethodException, SecurityException {
     Constructor<Validacao> metodoConstrutor = Validacao.class.getDeclaredConstructor();
     assertTrue(Modifier.isPrivate(metodoConstrutor.getModifiers()));
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
   @Test
-  public void naoDeveSerPossivelInstanciar() throws ClassNotFoundException, NoSuchMethodException, SecurityException {
-    Class clazz = Class.forName(Validacao.class.getName());
-    Constructor metodoConstrutor = clazz.getDeclaredConstructor();
+  public void testNaoPossivelInstanciacao() throws NoSuchMethodException, SecurityException {
+    Constructor<Validacao> metodoConstrutor = Validacao.class.getDeclaredConstructor();
     metodoConstrutor.setAccessible(true);
     InvocationTargetException excecao = assertThrows(InvocationTargetException.class, () -> metodoConstrutor.newInstance());
     assertEquals(AssertionError.class, excecao.getCause().getClass());
@@ -37,15 +35,12 @@ class ValidacaoTest {
   @ParameterizedTest
   @NullAndEmptySource
   @ValueSource(strings = { " ", "  ", "            " })
-  public void deveRetornarExcecaoAoValidar(final String texto) {
-    final String nomeCampo = "Nome";
-    final CampoObrigatorioException excecao = assertThrows(CampoObrigatorioException.class, () -> Validacao.campoObrigatorio(texto, nomeCampo));
-//    assertEquals(nomeCampo, excecao.getNomeCampo());
+  public void testCampoObrigatorioNaoPreenchido(final String campo) {
+    assertThrows(CampoObrigatorioException.class, () -> Validacao.campoObrigatorio(campo, "Teste"));
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = { "Teste", "Teste 2", "Teste com mais palavras" })
-  public void naoDeveRetornarExcecaoAoValidar(final String texto) {
-    assertDoesNotThrow(() -> Validacao.campoObrigatorio(texto, "Idade"));
+  @Test
+  public void testCampoObrigatorioPreenchido() {
+    assertDoesNotThrow(() -> Validacao.campoObrigatorio("A", "Teste"));
   }
 }
