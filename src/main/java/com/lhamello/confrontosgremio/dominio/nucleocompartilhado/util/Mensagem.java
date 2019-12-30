@@ -15,7 +15,7 @@ public final class Mensagem {
     return RESOURCE_BUNDLE.getString(chave);
   }
 
-  public static String getMensagem(final String chave, Object... parametros) {
+  public static String getMensagem(final String chave, final Object... parametros) {
     final String mensagem = getMensagem(chave);
     return MessageFormat.format(mensagem, parametros);
   }
