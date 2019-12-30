@@ -12,7 +12,7 @@ public class TextoTamanhoMaximoException extends RuntimeException {
   }
 
   private static String construirMensagem(final String nomeCampo, final int tamanhoExato) {
-    final String mensagem;
+    String mensagem;
 
     if (tamanhoExato > UM_CARACTER) {
       mensagem = Mensagem.getMensagem("dominio.nucleocompartilhado.excecao.textotamanhomaximo.plural", nomeCampo, tamanhoExato);
