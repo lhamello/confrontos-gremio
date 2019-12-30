@@ -1,7 +1,6 @@
 package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util;
 
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.CampoObrigatorioException;
 import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.TextoTamanhoExatoException;
@@ -10,7 +9,7 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.TextoTa
 public final class Validacao {
 
   private Validacao() {
-    throw new AssertionError(ResourceBundle.getBundle("messages").getString("global.erro.instanciar.classeutilitaria"));
+    throw new AssertionError(Mensagem.getMensagem("global.erro.instanciar.classeutilitaria"));
   }
 
   public static void campoObrigatorio(final Object campo, final String nomeCampo) {
