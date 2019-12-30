@@ -1,6 +1,7 @@
 package com.lhamello.confrontosgremio.dominio.model.pais;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -14,38 +15,67 @@ import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.TextoTa
 
 public class PaisTest {
 
+  private static final String ABREVIATURA = "BRA";
+  private static final String NOME = "BRASIL";
+  private static final Continente CONTINENTE = Continente.AMERICA_DO_SUL;
+
   @Test
-  public void deveCriarPais() {
-    assertDoesNotThrow(() -> new Pais("BRA", "Brasil", Continente.AMERICA_DO_SUL));
+  public void testNovoPais() {
+    assertDoesNotThrow(() -> new Pais(ABREVIATURA, NOME, CONTINENTE));
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @ValueSource(strings = { " ", "  ", "   " })
-  public void naoDeveCriarPaisSemAbreviatura(final String abreviatura) {
-    assertThrows(CampoObrigatorioException.class, () -> new Pais(abreviatura, "Argentina", Continente.AMERICA_DO_SUL));
+  public void testNovoPaisSemAbreviatura(final String abreviatura) {
+    assertThrows(CampoObrigatorioException.class, () -> new Pais(abreviatura, NOME, CONTINENTE));
   }
 
   @ParameterizedTest
   @ValueSource(strings = { "A", "AB", "ABCD" })
-  public void naoDeveCriarPaisComAbreviaturaComTamanhoDiferenteDe3(final String abreviatura) {
-    assertThrows(TextoTamanhoExatoException.class, () -> new Pais(abreviatura, "México", Continente.AMERICA_DO_NORTE));
+  public void testNovoPaisComTamanhoAbreviaturaDiferenteDe3(final String abreviatura) {
+    assertThrows(TextoTamanhoExatoException.class, () -> new Pais(abreviatura, NOME, CONTINENTE));
+  }
+
+  @Test
+  public void testGetAbreviatura() {
+    final Pais pais = new Pais(ABREVIATURA, NOME, CONTINENTE);
+    assertEquals(ABREVIATURA, pais.getAbreviatura());
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @ValueSource(strings = { " ", "  ", "   " })
-  public void naoDeveCriarPaisSemNome(final String nome) {
-    assertThrows(CampoObrigatorioException.class, () -> new Pais("ING", nome, Continente.EUROPA));
+  public void testNovoPaisSemNome(final String nome) {
+    assertThrows(CampoObrigatorioException.class, () -> new Pais(ABREVIATURA, nome, CONTINENTE));
   }
 
   @Test
-  public void naoDeveCriarPaisComNomeComMaisDeCinquentaCaracateres() {
+  public void testNovoPaisComNomeComMaisDeCinquentaCaracteres() {
     assertThrows(TextoTamanhoMaximoException.class, () -> new Pais("RAS", "TESTEDENOMEDEPAISCOMMAISDECINQUENTACARACTERESSSSS51", Continente.AFRICA));
   }
-  
+
   @Test
-  public void naoDeveCriarPaisSemContinente() {
-    assertThrows(CampoObrigatorioException.class, () -> new Pais("JAP", null, Continente.ASIA));
+  public void testGetNome() {
+    final Pais pais = new Pais(ABREVIATURA, NOME, CONTINENTE);
+    assertEquals(NOME, pais.getNome());
+  }
+
+  @Test
+  public void testNovoPaisSemContinente() {
+    assertThrows(CampoObrigatorioException.class, () -> new Pais(ABREVIATURA, NOME, null));
+  }
+
+  @Test
+  public void testGetContinente() {
+    final Pais pais = new Pais(ABREVIATURA, NOME, CONTINENTE);
+    assertEquals(CONTINENTE, pais.getContinente());
+  }
+
+  @Test
+  public void testToString() {
+    final Pais pais = new Pais(ABREVIATURA, NOME, CONTINENTE);
+    final String esperado = String.format("%s (%s)", NOME, ABREVIATURA);
+    assertEquals(esperado, pais.toString());
   }
 }
