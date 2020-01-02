@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao.TextoTamanhoExatoException;
+
 class TextoTamanhoExatoExceptionTest {
 
   private static final String NOME_CAMPO = "Teste";

@@ -1,10 +1,10 @@
-package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao;
+package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao;
 
 import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util.Mensagem;
 
-public class CampoObrigatorioException extends RuntimeException {
+public class CampoObrigatorioException extends ErroValidacaoException {
 
-  private static final long serialVersionUID = -7203793613868622224L;
+  private static final long serialVersionUID = 3138437383776817544L;
 
   public CampoObrigatorioException(final String nomeCampo) {
     super(Mensagem.getMensagem("dominio.nucleocompartilhado.excecao.campoobrigatorio", nomeCampo));

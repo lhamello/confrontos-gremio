@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.CampoObrigatorioException;
-import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.TextoTamanhoExatoException;
-import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.TextoTamanhoMaximoException;
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao.CampoObrigatorioException;
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao.TextoTamanhoExatoException;
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao.TextoTamanhoMaximoException;
 
 public final class Validacao {
 

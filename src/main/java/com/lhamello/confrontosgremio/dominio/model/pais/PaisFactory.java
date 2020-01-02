@@ -5,16 +5,17 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.ErroDominioException;
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao.DominioException;
+import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao.ErroValidacaoException;
 
 public class PaisFactory {
 
   @Inject
-  private List<Exception> errosValidacao;
+  private List<ErroValidacaoException> errosValidacao;
   @Inject
   private PaisRepository repositorio;
 
-  public Pais criarPais(final String abreviaturaPais, final String nomePais, final String abreviaturaContinente) {
+  public Pais criarPais(final String abreviaturaPais, final String nomePais, final String abreviaturaContinente) throws DominioException {
     Continente continente = this.encontrarContinente(abreviaturaContinente);
     Pais novoPais = new Pais(abreviaturaPais, nomePais, continente);
 
@@ -22,7 +23,7 @@ public class PaisFactory {
     this.verificarSeNovoPaisJaExiste(abreviaturaPais, nomePais);
 
     if (!errosValidacao.isEmpty()) {
-      throw new ErroDominioException(errosValidacao);
+      throw new DominioException(errosValidacao);
     }
 
     return novoPais;
@@ -32,7 +33,7 @@ public class PaisFactory {
     Optional<Continente> optional = Continente.getInstancia(abreviaturaContinente);
 
     if (optional.isEmpty()) {
-      errosValidacao.add(new RuntimeException("Continente não encontrado.")); // TODO: trocar exceção
+      errosValidacao.add(new ContinenteNaoEcontradoException());
     }
 
     return optional.get();
@@ -44,7 +45,7 @@ public class PaisFactory {
 
   private void verificarSeNovoPaisJaExiste(final String abreviaturaPais, final String nomePais) {
     if (repositorio.isPaisJaCadastrado(abreviaturaPais, nomePais)) {
-      errosValidacao.add(new RuntimeException("País já existente.")); // TODO: trocar exceção
+      errosValidacao.add(new PaisDuplicadoException());
     }
   }
 }

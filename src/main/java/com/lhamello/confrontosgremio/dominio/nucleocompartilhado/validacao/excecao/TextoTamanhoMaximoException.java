@@ -1,10 +1,10 @@
-package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.excecao;
+package com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.excecao;
 
 import com.lhamello.confrontosgremio.dominio.nucleocompartilhado.util.Mensagem;
 
-public class TextoTamanhoMaximoException extends RuntimeException {
+public class TextoTamanhoMaximoException extends ErroValidacaoException {
 
-  private static final long serialVersionUID = -654823636615792950L;
+  private static final long serialVersionUID = 2585985271761982604L;
   private static final int UM_CARACTER = 1;
 
   public TextoTamanhoMaximoException(final String nomeCampo, final int tamanhoMaximo) {
