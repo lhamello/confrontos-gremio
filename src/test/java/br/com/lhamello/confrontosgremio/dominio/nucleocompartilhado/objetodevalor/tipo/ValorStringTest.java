@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -16,12 +15,7 @@ import br.com.lhamello.confrontosgremio.dominio.nucleocompartilhado.validacao.no
 
 class ValorStringTest {
 
-  private ValorString instancia;
-
-  @BeforeEach
-  void criarInstanciaTeste() {
-    instancia = ValorString.criar("Teste");
-  }
+  private final ValorString instancia = ValorString.criar("Teste");
 
   @Test
   void testCriarNovaInstancia() {
