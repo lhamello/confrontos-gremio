@@ -2,6 +2,6 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
   <!-- <include file="changelog/01-create-country.xml" relativeToChangelogFile="true" /> -->
-  <!-- <include file="src/main/resources/db/changelog/01-create-country.xml.xml" /> -->
+  <!-- <include file="src/main/resources/db/changelog/01-create-continent.xml.xml" /> -->
   <includeAll path="classpath*:db/changelog/" relativeToChangelogFile="false" />
 </databaseChangeLog>

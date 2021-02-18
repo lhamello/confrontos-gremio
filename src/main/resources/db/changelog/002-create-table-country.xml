@@ -1,0 +1,54 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet id="002.01" author="luiz-mello">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <sequenceExists sequenceName="country_seq" />
+      </not>
+    </preConditions>
+
+    <createSequence sequenceName="country_seq" incrementBy="1" startValue="1" minValue="1" maxValue="999" />
+
+    <comment>Criada sequence country_seq</comment>
+  </changeSet>
+
+  <changeSet id="002.02" author="luiz-mello">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="country" />
+      </not>
+    </preConditions>
+
+    <createTable tableName="country">
+      <column name="id" type="numeric(3)">
+        <constraints nullable="false" unique="true" primaryKey="true" />
+      </column>
+      <column name="abbreviation" type="char(3)">
+        <constraints nullable="false" unique="true" />
+      </column>
+      <column name="name" type="varchar(20)">
+        <constraints nullable="false" unique="true" />
+      </column>
+      <column name="continent_id" type="numeric(1)">
+        <constraints nullable="false" unique="false" referencedTableName="continent" referencedColumnNames="id" foreignKeyName="continent_country_fk" />
+      </column>
+      <column name="image_path" type="varchar(255)">
+        <constraints nullable="false" unique="true" />
+      </column>
+      <column name="flag_path" type="varchar(255)">
+        <constraints nullable="false" unique="true" />
+      </column>
+      <column name="small_flag_path" type="varchar(255)">
+        <constraints nullable="false" unique="true" />
+      </column>
+    </createTable>
+
+    <comment>Criada tabela country</comment>
+  </changeSet>
+
+</databaseChangeLog>
