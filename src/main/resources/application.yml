@@ -1,11 +1,13 @@
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    password: postgres
-    url: jdbc:postgresql://localhost:5432/confrontos-gremio
-    username: postgres
-    
-  jpa:    show-sql: true
-      liquibase:    change-log: classpath:db/liquibase-changelog.xml
-    enabled: true
-    
+   datasource:
+      driver-class-name: org.postgresql.Driver
+      password: postgres
+      url: jdbc:postgresql://localhost:5432/confrontos-gremio
+      username: postgres
+   jpa:
+      hibernate:
+         ddl-auto: create-drop
+      show-sql: true
+   liquibase:
+      change-log: classpath:db/liquibase-changelog.xml
+      enabled: false
