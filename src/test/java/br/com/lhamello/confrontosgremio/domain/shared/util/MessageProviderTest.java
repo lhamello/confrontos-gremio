@@ -33,16 +33,17 @@ class MessageProviderTest {
   @Test
   void shouldReturnMessage() {
     final String expected = "O método construtor foi suprimido pois classe utilitária não deve ser instanciada.";
-    final String actual = MessageProvider.getMessage("utilityClass.validation.constraints.instanciation.message");
+    final String actual = MessageProvider.getMessage("utilityClass.construction.message");
     assertEquals(expected, actual);
   }
 
   @Test
   void shouldReturnMessageWithParams() {
+    final String key = "notification.exactSize.message";
     final String expected1 = "Deve possuir 1 caracter.";
-    final String actual1 = MessageProvider.getMessage("notification.validation.constraints.exactSize.message", 1);
+    final String actual1 = MessageProvider.getMessage(key, 1);
     final String expected2 = "Deve possuir 30 caracteres.";
-    final String actual2 = MessageProvider.getMessage("notification.validation.constraints.exactSize.message", 30);
+    final String actual2 = MessageProvider.getMessage(key, 30);
     assertAll(
         () -> assertEquals(expected1, actual1), 
         () -> assertEquals(expected2, actual2)
