@@ -13,9 +13,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import br.com.lhamello.confrontosgremio.domain.shared.a.RequiredFieldNotification;
 import br.com.lhamello.confrontosgremio.domain.shared.notification.ExceededMaximumSizeNotification;
 import br.com.lhamello.confrontosgremio.domain.shared.notification.MustContainOnlyLettersNotification;
-import br.com.lhamello.confrontosgremio.domain.shared.notification.RequiredFieldNotification;
 
 class TextTest {
 
@@ -88,6 +88,8 @@ class TextTest {
     assertTrue(text.notifyIfExceededMaxSize(maxSize).isEmpty());
   }
   
+  //HASHCODE
+  
   @Test
   void shouldReturnSameHashcode() {
     final Text text1 = Text.of("Teste");
@@ -101,6 +103,8 @@ class TextTest {
     final Text text2 = Text.of("Teste2");
     assertNotEquals(text1.hashCode(), text2.hashCode());
   }
+  
+  // EQUALS
   
   @Test
   void shouldBeEquals() {
@@ -121,7 +125,8 @@ class TextTest {
     assertAll(
         () -> assertNotEquals(text1, text2),
         () -> assertNotEquals(text1, notification),
-        () -> assertNotEquals(text2, notification)
+        () -> assertNotEquals(text2, notification),
+        () -> assertNotEquals(text2, null)
     );
   }
 }

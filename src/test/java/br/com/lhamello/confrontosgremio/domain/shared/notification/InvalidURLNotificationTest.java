@@ -5,16 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class ExceededMaximumSizeNotificationTest {
+class InvalidURLNotificationTest {
 
   @Test
   void shouldCreateInstanceSuccessfully() {
-    final int maxSize = 150;
-    final String expectedMessage = "Deve possuir no máximo 150 caracteres.";
-    final ExceededMaximumSizeNotification notification = ExceededMaximumSizeNotification.create(maxSize);
+    final String expectedMessage = "URL inválida.";
+    final InvalidURLNotification notification = InvalidURLNotification.create();
     
     assertAll(
-        () -> assertEquals(expectedMessage, notification.toString()),
+        () -> assertEquals(expectedMessage, notification.toString()), 
         () -> assertEquals(expectedMessage, notification.getMessage())
     );
   }
